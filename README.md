@@ -2,13 +2,20 @@
 
 Para usar o script e necessario possuir o navegador Google Chrome Versão 96.0.4664.93 (Versão oficial) 64 bits
 
+e ter os comentarios ja definidos dentro do arquivo Comentarios.txt
+
+![image](https://user-images.githubusercontent.com/54445515/145237567-d01baf57-7eda-4d9c-99f9-d036e91a6a62.png)
+
+o script le todos os comentarios ja pre estabelecido e escolhe aleatoriamente um dentro do arquivo.
+
+
+![image](https://user-images.githubusercontent.com/54445515/145234883-a20dc8c4-39d6-49df-8541-f054708b5004.png)
+
 e preencher todos os campos abaixo conforme imagem
 
 Login e senha do instagram
 
 E o link da foto do instagram para comentar
-
-![image](https://user-images.githubusercontent.com/54445515/145234883-a20dc8c4-39d6-49df-8541-f054708b5004.png)
 
 apos inserir a quantidade de comentarios que quer na foto
 
