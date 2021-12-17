@@ -6,7 +6,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 
 
-class Instagem:
+class Instagem():
     def __init__(self):
         self.driver = webdriver.Chrome()
 
@@ -41,6 +41,7 @@ class Instagem:
 
         except Exception as e:
             print(e)
+            self.driver.close()
 
     def Postagem(self,LINK):
         try:
@@ -50,6 +51,7 @@ class Instagem:
 
         except Exception as e:
             print(e)
+            self.driver.close()
 
     def Comenta(self,quantidade_comentario,tempo_de_descanco_em_segundos):
         try:
@@ -57,14 +59,49 @@ class Instagem:
             Arquivo = open("Comentarios.txt",encoding='utf-8')
             comentarios = Arquivo.readlines()
             while i < quantidade_comentario:
+                comentario = random.choice(comentarios)
                 print('Comentando')
-                time.sleep(tempo_de_descanco_em_segundos)
                 self.driver.find_element(By.CLASS_NAME,'Ypffh').click()
-                self.driver.find_element(By.CLASS_NAME,'Ypffh').send_keys(random.choice(comentarios),Keys.ENTER)
+                self.driver.find_element(By.CLASS_NAME,'Ypffh').send_keys(comentario,Keys.ENTER)
                 i += 1
+                print(f'foi comentado {i}')
+                time.sleep(tempo_de_descanco_em_segundos)
 
 
 
         except Exception as e:
             print(e)
+            self.driver.close()
+
+        finally:
+            print(f'O script terminou comentando {i}')
+            self.driver.close()
+
+
+    def Marca_Amigo(self,quantidade_comentario,tempo_de_descanco_em_segundos):
+        try:
+            a = 0
+            Arquivo = open("Amigos.txt",encoding='utf-8')
+            Amigo = Arquivo.readlines()
+            while a < quantidade_comentario:
+                comentarioamigo = random.choice(Amigo)
+                print('Marcando')
+                self.driver.find_element(By.CLASS_NAME,'Ypffh').click()
+                time.sleep(2.3)
+                self.driver.find_element(By.CLASS_NAME,'Ypffh').send_keys(comentarioamigo,Keys.TAB)
+                time.sleep(2.3)
+                self.driver.find_element(By.CLASS_NAME, 'Ypffh').send_keys(Keys.ENTER)
+                a += 1
+                print(f'o amigo {comentarioamigo} Marcado total {a}')
+                time.sleep(tempo_de_descanco_em_segundos)
+
+
+
+        except Exception as e:
+            print(e)
+            self.driver.close()
+
+        finally:
+            print(f'O script terminou comentando {a}')
+            self.driver.close()
 

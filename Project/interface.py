@@ -3,14 +3,20 @@ from Project.main import Instagem
 
 
 main = Tk()
+var = IntVar()
 
 
 class Logar():
     def logar(self):
-        self.bot=Instagem()
+        selection = var.get()
+        self.bot = Instagem()
         self.bot.login(self.login.get(),self.password.get())
         self.linkfoto()
-        self.comenta()
+        if selection == 1:
+            self.marcarAmigos()
+        else:
+            self.comenta()
+
 
     def linkfoto(self):
         self.bot.Postagem(self.LinkInstagram.get())
@@ -19,6 +25,15 @@ class Logar():
         qTd=int(self.QtdComentarios.get())
         iVcS=int(self.IntervaloComentariosSeg.get())
         self.bot.Comenta(qTd,iVcS)
+
+    def marcarAmigos(self):
+        AqTd=int(self.QtdComentarios.get())
+        AiVcS=int(self.IntervaloComentariosSeg.get())
+
+        self.bot.Marca_Amigo(AqTd,AiVcS)
+
+
+
 
 class Aplicacao(Logar):
     def __init__(self):
@@ -55,9 +70,19 @@ class Aplicacao(Logar):
         self.QtdComentarios=Entry(self.FramePrincipal)
         self.QtdComentarios.place(relx=0.30,rely=0.30 ,width=50)
 
+        Label(self.FramePrincipal,text='Marcar amigo ?',bg='white',fg='#B22222').place(relx=0.08,rely=0.35)
+
+        Radiobutton(self.FramePrincipal,text='Sim' ,bg='white',fg='#B22222',variable=var,value=1).place(relx=0.30,rely=0.35)
+        Radiobutton(self.FramePrincipal, text='Nao', bg='white', fg='#B22222',variable=var,value=2).place(relx=0.40, rely=0.35)
+
         Label(self.FramePrincipal, text='Intervalo entre comentarios em Segundos', bg='white',fg='#B22222').place(relx=0.08, rely=0.40)
         self.IntervaloComentariosSeg=Entry(self.FramePrincipal)
         self.IntervaloComentariosSeg.place(relx=0.40, rely=0.40,width=50)
 
-        self.BtnLogareComentar = Button(self.main, text='Logar', command=self.logar)
-        self.BtnLogareComentar.place(relx=0.5, rely=0.60)
+        self.BtnLogareComentar = Button(self.main, text='Iniciar', command=self.logar)
+        self.BtnLogareComentar.place(relx=0.2, rely=0.60,width=100,height=30)
+
+        self.BtnSair = Button(self.main, text='Sair', command=self.main.destroy)
+        self.BtnSair.place(relx=0.5, rely=0.60, width=100,height=30)
+
+
