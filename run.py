@@ -1,4 +1,5 @@
-from Project.interface import Aplicacao
+from Project.validation import connection_check,serial
 
-Aplicacao()
 
+
+connection_check()
