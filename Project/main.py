@@ -12,7 +12,7 @@ class Instagem():
     def __init__(self):
         opcao = Options()
         opcao.headless = True
-        self.driver = webdriver.Chrome('chromedriver.exe',options=opcao)
+        self.driver = webdriver.Chrome() #options=opcao
 
     @staticmethod
     def digitar_igual_humano(frase):
