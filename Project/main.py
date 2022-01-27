@@ -4,12 +4,15 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.chrome.options import Options
 from tkinter import messagebox
 
 
 class Instagem():
     def __init__(self):
-        self.driver = webdriver.Chrome()
+        opcao = Options()
+        opcao.headless = True
+        self.driver = webdriver.Chrome('chromedriver.exe',options=opcao)
 
     @staticmethod
     def digitar_igual_humano(frase):
