@@ -1,9 +1,10 @@
 from tkinter import *
 from Project.main import Instagem
-
+from threading import *
 
 main = Tk()
 var = IntVar()
+
 
 
 class Logar():
@@ -15,7 +16,9 @@ class Logar():
         if selection == 1:
             self.marcarAmigos()
         else:
-            self.comenta()
+            #self.comenta()
+            a = Instagem()
+            a.obterUsuarios()
 
 
     def linkfoto(self):
@@ -32,11 +35,16 @@ class Logar():
 
         self.bot.Marca_Amigo(AqTd,AiVcS)
 
+    def threading(self):
+        t1 = Thread(target=self.logar)
+        t1.start()
+
 
 
 
 class Aplicacao(Logar):
     def __init__(self):
+
         self.main=main
         self.Principal()
         self.Frame()
@@ -51,7 +59,6 @@ class Aplicacao(Logar):
     def Frame(self):
         self.FramePrincipal = Frame(self.main, bg='#F8F8FF', highlightbackground='black')
         self.FramePrincipal.place(relx=0.01, rely=0.01, relwidth=0.98, relheight=0.98)
-
 
     def Label(self):
         Label(self.FramePrincipal, text='Login', bg='white',fg='#B22222').place(relx=0.08, rely=0.01)
@@ -79,10 +86,12 @@ class Aplicacao(Logar):
         self.IntervaloComentariosSeg=Entry(self.FramePrincipal)
         self.IntervaloComentariosSeg.place(relx=0.45, rely=0.40,width=50)
 
-        self.BtnLogareComentar = Button(self.main, text='Iniciar', command=self.logar)
+        self.BtnLogareComentar = Button(self.main, text='Iniciar', command=self.threading)
         self.BtnLogareComentar.place(relx=0.2, rely=0.60,width=100,height=30)
 
         self.BtnSair = Button(self.main, text='Sair', command=self.main.destroy)
         self.BtnSair.place(relx=0.5, rely=0.60, width=100,height=30)
+
+
 
 
