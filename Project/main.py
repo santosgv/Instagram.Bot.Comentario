@@ -6,6 +6,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.chrome.options import Options
 from tkinter import messagebox
+import requests
 
 
 class Instagem():
@@ -13,12 +14,7 @@ class Instagem():
         opcao = Options()
         opcao.headless = True
         self.driver = webdriver.Chrome() #options=opcao
-
-    @staticmethod
-    def digitar_igual_humano(frase):
-        for letra in frase:
-            frase.send_keys(letra)
-            time.sleep(random.randint(1, 5) / 30)
+        print("Current session is {}".format(self.driver.session_id))
 
     def login(self, username, password):
         self.username = username
@@ -26,6 +22,7 @@ class Instagem():
         driver = self.driver
         driver.get("https://www.instagram.com")
         time.sleep(3)
+
         try:
             user_element = driver.find_element(By.XPATH,
                                                "//input[@name='username']")
@@ -57,25 +54,41 @@ class Instagem():
             print(p)
             self.driver.close()
 
+    def obterUsuarios(self):
+        try:
+            time.sleep(5)
+            self.url = ('https://www.instagram.com/p/CMQBbjmH8i6/')
+            WebDriverWait(self.driver.find_element(By.CLASS_NAME, 'zV_Nj').click(),5)
+            time.sleep(5)
+            WebDriverWait(self.driver.find_element(By.CLASS_NAME, 'Jv7Aj mArmR MqpiF'),5)
+
+
+        except Exception as p:
+            messagebox.showinfo(f"Ocorreu a exessao P' ,'{p}")
+            self.driver.close()
+
     def Comenta(self, quantidade_comentario, tempo_de_descanco_em_segundos):
         global i
         try:
             i = 0
-            Arquivo = open("Comentarios.txt", encoding='utf-8')
-            comentarios = Arquivo.readlines()
-            while i < quantidade_comentario:
-                comentario = random.choice(comentarios)
-                str('Comentando')
-                self.driver.find_element(By.CLASS_NAME, 'Ypffh').click()
-                self.driver.find_element(By.CLASS_NAME, 'Ypffh').send_keys(comentario, Keys.ENTER)
-                i += 1
-                print(f'foi comentado {i}')
-                time.sleep(tempo_de_descanco_em_segundos)
+            print(quantidade_comentario)
+            print(tempo_de_descanco_em_segundos)
+            self.obterUsuarios()
+
+            # Arquivo = open("Comentarios.txt", encoding='utf-8')
+            # comentarios = Arquivo.readlines()
+            # while i < quantidade_comentario:
+            #     comentario = random.choice(comentarios)
+            #     self.driver.find_element(By.CLASS_NAME, 'Ypffh').click()
+            #     self.driver.find_element(By.CLASS_NAME, 'Ypffh').send_keys(comentario, Keys.ENTER)
+            #     i += 1
+            #     messagebox.showinfo("Comentando",f'{i}')
+            #     time.sleep(tempo_de_descanco_em_segundos)
 
 
 
         except Exception as mse:
-            print(mse)
+            messagebox.showinfo(f'ocorreu a Exessao mse', f'{mse}')
             self.driver.close()
 
         finally:
@@ -90,22 +103,24 @@ class Instagem():
             Amigo = Arquivo.readlines()
             while a < quantidade_comentario:
                 comentarioamigo = random.choice(Amigo)
-                str('Marcando')
+                messagebox.showinfo('O boot esta', f' comentando')
                 self.driver.find_element(By.CLASS_NAME, 'Ypffh').click()
                 time.sleep(2.3)
                 self.driver.find_element(By.CLASS_NAME, 'Ypffh').send_keys(comentarioamigo, Keys.TAB)
                 time.sleep(2.3)
                 self.driver.find_element(By.CLASS_NAME, 'Ypffh').send_keys(Keys.ENTER)
                 a += 1
-                print(f'o amigo {comentarioamigo} Marcado total {a}')
+                messagebox.showinfo(f'o amigo {comentarioamigo} Marcado total {a}')
                 time.sleep(tempo_de_descanco_em_segundos)
 
 
 
         except Exception as e:
-            print(e)
+            messagebox.showinfo(f'ocorreu a exessao E ',f'{e}')
             self.driver.close()
 
         finally:
             messagebox.showinfo('O script terminou', f' total de comentarios {a}')
             self.driver.close()
+
+
