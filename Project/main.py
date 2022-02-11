@@ -10,11 +10,27 @@ import requests
 
 
 class Instagem():
-    def __init__(self):
-        opcao = Options()
-        opcao.headless = True
-        self.driver = webdriver.Chrome() #options=opcao
-        print("Current session is {}".format(self.driver.session_id))
+    #def __init__():
+        #opcao = Options()
+        #opcao.headless = True
+        #self.driver = webdriver.Chrome() #options=opcao
+        #print("Current session is {}".format(self.driver.session_id))
+    @classmethod
+    def usuarios(cls):
+        with open("Contas.txt",'r' ,encoding='utf-8') as arq:
+                cls.usuarios = arq.readlines()
+                cls.usuarios = list(map(lambda x: x.replace('\n', ''), cls.usuarios))
+                cls.usuarios = list(map(lambda x: x.split(','), cls.usuarios))
+        cat=[]
+
+        for a in cls.usuarios:
+            cat.append(a)
+
+        for i in cat:
+            print(i[0])
+
+
+        return print(cat)
 
     def login(self, username, password):
         self.username = username
@@ -54,36 +70,20 @@ class Instagem():
             print(p)
             self.driver.close()
 
-    def obterUsuarios(self):
-        try:
-            time.sleep(5)
-            self.url = ('https://www.instagram.com/p/CMQBbjmH8i6/')
-            WebDriverWait(self.driver.find_element(By.CLASS_NAME, 'zV_Nj').click(),5)
-            time.sleep(5)
-            WebDriverWait(self.driver.find_element(By.CLASS_NAME, 'Jv7Aj mArmR MqpiF'),5)
-
-
-        except Exception as p:
-            messagebox.showinfo(f"Ocorreu a exessao P' ,'{p}")
-            self.driver.close()
 
     def Comenta(self, quantidade_comentario, tempo_de_descanco_em_segundos):
         global i
         try:
             i = 0
-            print(quantidade_comentario)
-            print(tempo_de_descanco_em_segundos)
-            self.obterUsuarios()
-
-            # Arquivo = open("Comentarios.txt", encoding='utf-8')
-            # comentarios = Arquivo.readlines()
-            # while i < quantidade_comentario:
-            #     comentario = random.choice(comentarios)
-            #     self.driver.find_element(By.CLASS_NAME, 'Ypffh').click()
-            #     self.driver.find_element(By.CLASS_NAME, 'Ypffh').send_keys(comentario, Keys.ENTER)
-            #     i += 1
-            #     messagebox.showinfo("Comentando",f'{i}')
-            #     time.sleep(tempo_de_descanco_em_segundos)
+            Arquivo = open("Comentarios.txt", encoding='utf-8')
+            comentarios = Arquivo.readlines()
+            while i < quantidade_comentario:
+                comentario = random.choice(comentarios)
+                self.driver.find_element(By.CLASS_NAME, 'Ypffh').click()
+                self.driver.find_element(By.CLASS_NAME, 'Ypffh').send_keys(comentario, Keys.ENTER)
+                i += 1
+                messagebox.showinfo("Comentando",f'{i}')
+                time.sleep(tempo_de_descanco_em_segundos)
 
 
 
@@ -123,4 +123,8 @@ class Instagem():
             messagebox.showinfo('O script terminou', f' total de comentarios {a}')
             self.driver.close()
 
+
+
+a=Instagem()
+a.usuarios()
 
