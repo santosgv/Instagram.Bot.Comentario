@@ -15,22 +15,7 @@ class Instagem():
         #opcao.headless = True
         #self.driver = webdriver.Chrome() #options=opcao
         #print("Current session is {}".format(self.driver.session_id))
-    @classmethod
-    def usuarios(cls):
-        with open("Contas.txt",'r' ,encoding='utf-8') as arq:
-                cls.usuarios = arq.readlines()
-                cls.usuarios = list(map(lambda x: x.replace('\n', ''), cls.usuarios))
-                cls.usuarios = list(map(lambda x: x.split(','), cls.usuarios))
-        cat=[]
 
-        for a in cls.usuarios:
-            cat.append(a)
-
-        for i in cat:
-            print(i[0])
-
-
-        return print(cat)
 
     def login(self, username, password):
         self.username = username
@@ -59,6 +44,22 @@ class Instagem():
         except Exception as e:
             print(e)
             self.driver.close()
+
+
+    def usuarios(self):
+        with open("Contas.txt",'r' ,encoding='utf-8') as arq:
+                self.usuarios = arq.readlines()
+                self.usuarios = list(map(lambda x: x.replace('\n', ''), self.usuarios))
+                self.usuarios = list(map(lambda x: x.split(','), self.usuarios))
+        cat=[]
+
+        for a in self.usuarios:
+            cat.append(a)
+
+        for i in cat:
+            self.login(i[0],i[1])
+            return i[0],i[1]
+
 
     def Postagem(self, LINK):
         try:

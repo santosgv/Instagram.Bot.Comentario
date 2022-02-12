@@ -1,5 +1,5 @@
 from tkinter import *
-from Project.main import Instagem
+from Project.main import Instagem , usuarios
 from threading import *
 
 main = Tk()
@@ -11,14 +11,13 @@ class Logar():
     def logar(self):
         selection = var.get()
         self.bot = Instagem()
-        self.bot.login(self.login.get(),self.password.get())
         self.linkfoto()
         if selection == 1:
             self.marcarAmigos()
         else:
             #self.comenta()
             a = Instagem()
-            a.obterUsuarios()
+            a.usuarios()
 
 
     def linkfoto(self):
@@ -44,7 +43,6 @@ class Logar():
 
 class Aplicacao(Logar):
     def __init__(self):
-
         self.main=main
         self.Principal()
         self.Frame()
