@@ -10,7 +10,7 @@ import requests
 
 
 class Instagem():
-    def __init__():
+    def __init__(self):
         opcao = Options()
         opcao.headless = True
         self.driver = webdriver.Chrome() #options=opcao
