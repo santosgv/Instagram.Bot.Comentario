@@ -10,11 +10,11 @@ import requests
 
 
 class Instagem():
-    #def __init__():
-        #opcao = Options()
-        #opcao.headless = True
-        #self.driver = webdriver.Chrome() #options=opcao
-        #print("Current session is {}".format(self.driver.session_id))
+    def __init__():
+        opcao = Options()
+        opcao.headless = True
+        self.driver = webdriver.Chrome() #options=opcao
+        print("Current session is {}".format(self.driver.session_id))
 
 
     def login(self, username, password):
